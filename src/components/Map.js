@@ -2,9 +2,12 @@ import React from 'react';
 import {
   View,
   Text,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from 'react-native';
 import MapView from 'react-native-maps';
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Header from './Header';
 
@@ -32,6 +35,19 @@ class Map extends React.Component {
       }
     }
   }
+
+  static navigationOptions = ({ navigation }) => ({
+    title: 'Home',
+    headerRight: (
+      <View style={styles.loginButton}>
+        <TouchableOpacity
+          onPress={ () => navigation.navigate('Login') }
+        >
+          <Icon name='user' />
+        </TouchableOpacity>
+      </View>
+    )
+  })
 
   watchID: ?number = null
 
@@ -83,9 +99,9 @@ class Map extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.mapWrapper}>
-        <Header />
         <MapView
         region={this.state.initialPosition}
         style={styles.map}
@@ -99,6 +115,11 @@ class Map extends React.Component {
             </View>
           </MapView.Marker>
         </MapView>
+        <ActionButton
+          buttonColor="rgba(231,76,60,1)"
+          onPress={() => navigate('Scanner')}
+        >
+        </ActionButton>
       </View>
     )
   }
@@ -110,7 +131,7 @@ const styles = {
     alignItems: 'center',
   },
   map: {
-    height: 635,
+    height: 605,
     width: 412,
     justifyContent: 'center',
     alignItems: 'center',
@@ -126,6 +147,9 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center'
   },
+  loginButton: {
+    paddingRight: 10,
+  },
   marker: {
     height: 20,
     width: 20,
@@ -134,7 +158,12 @@ const styles = {
     borderRadius: 20/2,
     overflow: 'hidden',
     backgroundColor: '#007AFF'
-  }
+  },
+  actionButtonIcon: {
+    fontSize: 20,
+    height: 22,
+    color: 'white',
+  },
 }
 
 export default Map;

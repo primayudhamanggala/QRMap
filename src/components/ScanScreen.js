@@ -40,18 +40,9 @@ class ScanScreen extends React.Component {
             'upce'
           ]}
           aspect={Camera.constants.Aspect.fill}>
-          <Text style={styles.capture} onPress={this.takePicture.bind(this)}>[CAPTURE]</Text>
         </Camera>
       </View>
     )
-  }
-
-  takePicture() {
-  const options = {};
-  //options.location = ...
-  this.camera.capture({metadata: options})
-    .then((data) => console.log(data))
-    .catch(err => console.error(err));
   }
 }
 

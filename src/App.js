@@ -3,11 +3,16 @@ import {
   View,
   Text
 } from 'react-native';
+import { StackNavigator } from 'react-navigation';
 
-import Map from './components/Map'
+import Login from './components/Login';
+import Map from './components/Map';
+import ScanScreen from './components/ScanScreen';
 
-const App = () => (
-  <Map />
-)
+const App = StackNavigator({
+  Main: {screen: Map},
+  Login: {screen: Login},
+  Scanner: {screen: ScanScreen},
+});
 
 export default App;
